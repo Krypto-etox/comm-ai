@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CommAI - Practice - Two Sum</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+
+        /* Code Editor Specifics */
+        .code-textarea {
+            font-family: 'Courier New', Courier, monospace;
+            resize: none;
+            outline: none;
+            tab-size: 4;
+        }
+
+        /* Console Animation */
+        .console-fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 flex flex-col h-screen overflow-hidden">
+
+    <nav class="bg-gray-800 border-b border-gray-700 h-14 flex-none">
+        <div class="max-w-full mx-auto px-4 h-full flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="text-xl font-bold text-indigo-500 hover:text-indigo-400">CommAI</a>
+                <span class="text-gray-500">|</span>
+                <span class="text-gray-300 font-medium">Problems</span>
+                <span class="text-gray-500">/</span>
+                <span class="text-white font-medium">Two Sum</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div
+                    class="flex items-center text-green-500 text-sm font-semibold bg-green-900 bg-opacity-20 px-3 py-1 rounded-full">
+                    <i class="fas fa-signal mr-2"></i> Easy
+                </div>
+                <button class="bg-gray-700 hover:bg-gray-600 p-2 rounded-full transition">
+                    <i class="fas fa-cog text-gray-400"></i>
+                </button>
+                <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-sm font-bold">JD
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex flex-1 overflow-hidden">
+
+        <div class="w-1/2 flex flex-col border-r border-gray-700 bg-gray-900">
+            <div class="flex-1 overflow-y-auto p-6">
+                <h1 class="text-2xl font-bold text-white mb-4">1. Two Sum</h1>
+
+                <div class="prose prose-invert max-w-none">
+                    <p class="text-gray-300 mb-4">Given an array of integers <code>nums</code> and an integer
+                        <code>target</code>, return <em>indices of the two numbers such that they add up to
+                            <code>target</code></em>.</p>
+                    <p class="text-gray-300 mb-4">You may assume that each input would have <strong>exactly one
+                            solution</strong>, and you may not use the same element twice.</p>
+                    <p class="text-gray-300 mb-6">You can return the answer in any order.</p>
+
+                    <div class="space-y-4">
+                        <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                            <h3 class="text-sm font-bold text-gray-400 uppercase mb-2">Example 1</h3>
+                            <div class="font-mono text-sm text-gray-300">
+                                <span class="text-indigo-400">Input:</span> nums = [2,7,11,15], target = 9<br>
+                                <span class="text-indigo-400">Output:</span> [0,1]<br>
+                                <span class="text-gray-500">Explanation: Because nums[0] + nums[1] == 9, we return [0,
+                                    1].</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                            <h3 class="text-sm font-bold text-gray-400 uppercase mb-2">Example 2</h3>
+                            <div class="font-mono text-sm text-gray-300">
+                                <span class="text-indigo-400">Input:</span> nums = [3,2,4], target = 6<br>
+                                <span class="text-indigo-400">Output:</span> [1,2]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="text-sm font-bold text-gray-400 uppercase mb-2">Constraints</h3>
+                        <ul class="list-disc list-inside text-gray-400 text-sm space-y-1">
+                            <li>2 <= nums.length <=10^4</li>
+                            <li>-10^9 <= nums[i] <=10^9</li>
+                            <li>-10^9 <= target <=10^9</li>
+                            <li>Only one valid answer exists.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 border-t border-gray-700 bg-gray-800">
+                <button onclick="toggleHint()"
+                    class="flex items-center text-sm text-gray-400 hover:text-white transition">
+                    <i class="fas fa-lightbulb mr-2 text-yellow-500"></i> Show Hint
+                </button>
+                <div id="hint-box" class="hidden mt-2 text-sm text-gray-400 italic">
+                    Try using a hash map to store numbers you've already seen as you iterate through the array.
+                </div>
+            </div>
+        </div>
+
+        <div class="w-1/2 flex flex-col bg-gray-800">
+
+            <div class="flex items-center justify-between p-2 bg-gray-800 border-b border-gray-700">
+                <select id="language-select"
+                    class="bg-gray-700 text-sm text-gray-200 border border-gray-600 rounded px-2 py-1 focus:outline-none focus:border-indigo-500">
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python 3</option>
+                    <option value="java">Java</option>
+                    <option value="cpp">C++</option>
+                </select>
+
+                <div class="space-x-2">
+                    <button onclick="resetCode()" class="text-gray-400 hover:text-white text-sm px-3 py-1">
+                        <i class="fas fa-undo mr-1"></i> Reset
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex-1 relative bg-gray-900">
+                <div
+                    class="absolute left-0 top-0 bottom-0 w-10 bg-gray-900 border-r border-gray-700 text-right pr-2 pt-4 text-gray-600 font-mono text-sm select-none">
+                    1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12
+                </div>
+                <textarea id="code-editor"
+                    class="code-textarea w-full h-full bg-gray-900 text-gray-300 p-4 pl-12 text-sm focus:bg-gray-900 border-none"
+                    spellcheck="false"></textarea>
+            </div>
+
+            <div class="flex flex-col h-1/3 border-t border-gray-700 bg-gray-800">
+                <div class="flex justify-between items-center p-3 border-b border-gray-700 bg-gray-800">
+                    <span class="text-sm font-semibold text-gray-400">Console</span>
+                    <div class="space-x-2">
+                        <button onclick="runCode()"
+                            class="px-4 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded text-sm font-medium transition">
+                            Run Code
+                        </button>
+                        <button onclick="submitCode()"
+                            class="px-4 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded text-sm font-medium transition">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+
+                <div id="console-output" class="flex-1 p-4 font-mono text-sm overflow-y-auto bg-gray-900 text-gray-400">
+                    Run your code to see the output here...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Starter Code Templates
+        const starterCode = {
+            javascript: `/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    // Write your solution here
+    
+};`,
+            python: `class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        # Write your solution here
+        pass`,
+            java: `class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        // Write your solution here
+        
+    }
+}`,
+            cpp: `class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        // Write your solution here
+        
+    }
+};`
+        };
+
+        const editor = document.getElementById('code-editor');
+        const languageSelect = document.getElementById('language-select');
+        const consoleOutput = document.getElementById('console-output');
+
+        // Initialize
+        editor.value = starterCode.javascript;
+
+        // Language Change Handler
+        languageSelect.addEventListener('change', (e) => {
+            editor.value = starterCode[e.target.value];
+            consoleOutput.innerHTML = "Language switched. Code reset.";
+            consoleOutput.className = "flex-1 p-4 font-mono text-sm overflow-y-auto bg-gray-900 text-gray-400";
+        });
+
+        // Reset Code Handler
+        function resetCode() {
+            editor.value = starterCode[languageSelect.value];
+            consoleOutput.innerHTML = "Code reset to default template.";
+        }
+
+        // Hint Toggle
+        function toggleHint() {
+            const hintBox = document.getElementById('hint-box');
+            hintBox.classList.toggle('hidden');
+        }
+
+        // Tab Support in Textarea
+        editor.addEventListener('keydown', function (e) {
+            if (e.key == 'Tab') {
+                e.preventDefault();
+                var start = this.selectionStart;
+                var end = this.selectionEnd;
+                this.value = this.value.substring(0, start) +
+                    "    " + this.value.substring(end);
+                this.selectionStart = this.selectionEnd = start + 4;
+            }
+        });
+
+        // MOCK RUN LOGIC
+        // Note: Real execution requires a backend compiler (e.g., Judge0 API). 
+        // This is a browser-side simulation for JavaScript only.
+        function runCode() {
+            const lang = languageSelect.value;
+            const code = editor.value;
+
+            consoleOutput.innerHTML = `<span class="text-yellow-500"><i class="fas fa-spinner fa-spin mr-2"></i>Running...</span>`;
+
+            setTimeout(() => {
+                if (lang !== 'javascript') {
+                    consoleOutput.innerHTML = `<span class="text-orange-400">Note: Browser-side execution is only enabled for JavaScript in this demo. <br>Please select JavaScript to test the logic live.</span>`;
+                    return;
+                }
+
+                // Define Test Case
+                const nums = [2, 7, 11, 15];
+                const target = 9;
+
+                try {
+                    // Dangerous in production, okay for demo: Create function from string
+                    // We wrap user code to extract the function
+                    const userFunc = new Function(`
+                        ${code}
+                        return twoSum;
+                    `)();
+
+                    if (typeof userFunc !== 'function') {
+                        throw new Error("Could not find function 'twoSum'");
+                    }
+
+                    const result = userFunc(nums, target);
+
+                    // Validate Result (Simple check for [0, 1])
+                    const isCorrect = Array.isArray(result) &&
+                        result.length === 2 &&
+                        result.includes(0) &&
+                        result.includes(1);
+
+                    if (isCorrect) {
+                        consoleOutput.innerHTML = `
+                            <div class="console-fade-in">
+                                <h4 class="text-green-500 font-bold mb-2">Accepted</h4>
+                                <div class="bg-gray-800 p-3 rounded border border-gray-700">
+                                    <div class="mb-1"><span class="text-gray-500">Input:</span> nums = [2,7,11,15], target = 9</div>
+                                    <div class="mb-1"><span class="text-gray-500">Output:</span> [${result}]</div>
+                                    <div class="mb-1"><span class="text-gray-500">Expected:</span> [0,1]</div>
+                                    <div class="mt-2 text-xs text-green-400">Runtime: 2ms | Memory: 42MB</div>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        consoleOutput.innerHTML = `
+                            <div class="console-fade-in">
+                                <h4 class="text-red-500 font-bold mb-2">Wrong Answer</h4>
+                                <div class="bg-gray-800 p-3 rounded border border-gray-700">
+                                    <div class="mb-1"><span class="text-gray-500">Input:</span> nums = [2,7,11,15], target = 9</div>
+                                    <div class="mb-1"><span class="text-gray-500">Your Output:</span> ${JSON.stringify(result)}</div>
+                                    <div class="mb-1"><span class="text-gray-500">Expected:</span> [0,1]</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                } catch (err) {
+                    consoleOutput.innerHTML = `
+                        <div class="console-fade-in text-red-400">
+                            <h4 class="font-bold mb-2">Runtime Error</h4>
+                            <pre class="bg-gray-800 p-3 rounded border border-red-900 overflow-x-auto">${err.message}</pre>
+                        </div>
+                    `;
+                }
+            }, 600); // Fake delay for realism
+        }
+
+        function submitCode() {
+            consoleOutput.innerHTML = `<span class="text-green-500"><i class="fas fa-check-circle mr-2"></i>Solution Submitted Successfully! (Demo)</span>`;
+        }
+    </script>
+</body>
+
+</html>

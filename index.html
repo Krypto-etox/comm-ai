@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CommAI - AI-Powered Interview Prep</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <nav class="bg-white dark:bg-gray-800 shadow-lg transition-colors duration-300 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-indigo-600">CommAI</div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features"
+                        class="text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 font-medium">Features</a>
+                    <a href="#dsa"
+                        class="text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 font-medium">DSA
+                        Practice</a>
+                    <a href="#mock"
+                        class="text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 font-medium">Mock
+                        Interviews</a>
+                    <a href="#tutoring"
+                        class="text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 font-medium">AI
+                        Tutoring</a>
+                    <button id="theme-toggle" aria-label="Toggle theme"
+                        class="px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                        <span id="theme-icon">☀️</span>
+                    </button>
+                    <button class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 shadow-md">Get
+                        Started</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 drop-shadow-sm">Ace Your Tech Interviews</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-indigo-100">AI-powered interview preparation with
+                personalized DSA
+                practice, mock interviews, and 1:1 AI tutoring.</p>
+            <div class="space-x-4">
+                <button
+                    class="bg-white text-indigo-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 shadow-lg transition transform hover:-translate-y-1">Start
+                    Free Trial</button>
+                <button
+                    class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-indigo-600 transition">View
+                    Demo</button>
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Comprehensive Interview
+                Preparation</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div
+                    class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl hover:shadow-xl transition border border-gray-200 dark:border-gray-600">
+                    <div class="text-indigo-600 dark:text-indigo-400 text-4xl mb-4">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">DSA Practice</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Practice 1000+ DSA problems with instant feedback and
+                        detailed solutions.
+                    </p>
+                </div>
+                <div
+                    class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl hover:shadow-xl transition border border-gray-200 dark:border-gray-600">
+                    <div class="text-indigo-600 dark:text-indigo-400 text-4xl mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">AI Mock Interviews</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Simulate real interview scenarios with our AI
+                        interviewer and get detailed
+                        feedback.</p>
+                </div>
+                <div
+                    class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl hover:shadow-xl transition border border-gray-200 dark:border-gray-600">
+                    <div class="text-indigo-600 dark:text-indigo-400 text-4xl mb-4">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Personalized Tutoring</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Get 1:1 AI tutoring tailored to your learning style and
+                        progress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dsa" class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Master Data Structures & Algorithms
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
+                    Build confidence with our extensive library of problems. Analyze time complexity,
+                    get hints, and write code in your preferred language.
+                </p>
+            </div>
+
+            <div
+                class="bg-white dark:bg-gray-800 rounded-2xl p-8 md:p-12 shadow-2xl border border-gray-200 dark:border-gray-700 text-center relative overflow-hidden transition-colors duration-300">
+                <div
+                    class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500 opacity-10 rounded-full blur-3xl">
+                </div>
+
+                <div class="relative z-10">
+                    <div class="flex justify-center mb-6 space-x-4 text-4xl text-gray-500">
+                        <i class="fab fa-js text-yellow-500"></i>
+                        <i class="fab fa-python text-blue-500"></i>
+                        <i class="fab fa-java text-red-500"></i>
+                        <i class="fas fa-code text-green-500"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Ready to solve your first problem?
+                    </h3>
+
+                    <a href="dsaPractice.html"
+                        class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-indigo-600 rounded-full hover:bg-indigo-500 hover:shadow-lg hover:-translate-y-1 group">
+                        <span>Go to Practice Arena</span>
+                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+
+                    <p class="mt-6 text-sm text-gray-500 dark:text-gray-400">
+                        Includes LeetCode-style problems • Real-time execution • AI Hints
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mock" class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">AI Mock Interviews</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Practice with AI Interviewers
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">Experience realistic technical interviews and HR
+                        rounds with our AI
+                        interviewers.
+                        Get instant feedback on your problem-solving approach, code quality, and communication skills.
+                    </p>
+                    <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-600 dark:text-green-500 mt-1 mr-2"></i>
+                            <span>Real-time coding environment</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-600 dark:text-green-500 mt-1 mr-2"></i>
+                            <span>Personalized feedback and scores</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-600 dark:text-green-500 mt-1 mr-2"></i>
+                            <span>Company-specific interview questions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-600 dark:text-green-500 mt-1 mr-2"></i>
+                            <span>Focus on HR rounds</span>
+                        </li>
+                    </ul>
+                    <button class="mt-6 bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 shadow-md">
+                        <a href="./prototype.html">Start Mock Interview</a>
+                    </button>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 p-8 rounded-xl border border-gray-200 dark:border-gray-600">
+                    <div
+                        class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-xl font-bold">
+                                AI</div>
+                            <div class="ml-4">
+                                <div class="font-semibold text-gray-900 dark:text-white">Interviewer</div>
+                                <div class="text-sm text-gray-500">Technical Interview</div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-gray-100 dark:bg-gray-100 p-4 rounded-lg ">
+                                <p class="text-gray-800">Hello! I'll be your interviewer today. Let's start with a
+                                    warm-up question. How would you find the first non-repeating character in a string?
+                                </p>
+                            </div>
+                            <div class="flex justify-end">
+                                <div class="bg-indigo-600 text-white p-4 rounded-lg max-w-xs shadow-sm">
+                                    I'd use a hash map to count character frequencies, then iterate through the string
+                                    to find the first character with a count of 1.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tutoring" class="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">AI-Powered Tutoring</h2>
+            <div
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                <div class="md:flex">
+                    <div class="p-8 md:w-1/2">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Personalized Learning Path
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">Our AI tutor analyzes your strengths and
+                            weaknesses to create a
+                            customized learning path. Get explanations, practice problems, and detailed feedback
+                            tailored to your needs.</p>
+
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-gray-900 dark:text-gray-200">Data Structures</span>
+                                <span class="text-sm text-gray-500">75% complete</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-gray-900 dark:text-gray-200">Algorithms</span>
+                                <span class="text-sm text-gray-500">60% complete</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-green-500 h-2.5 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-gray-900 dark:text-gray-200">System Design</span>
+                                <span class="text-sm text-gray-500">30% complete</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 30%"></div>
+                            </div>
+                        </div>
+
+                        <button
+                            class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 shadow-md">Continue
+                            Learning</button>
+                    </div>
+                    <div
+                        class="p-8 bg-gray-50 dark:bg-gray-800 md:w-1/2 border-l border-gray-200 dark:border-gray-700 flex items-center justify-center">
+                        <div class="text-center w-full">
+                            <div
+                                class="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-robot text-4xl text-indigo-600"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Need help with a
+                                concept?</h4>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Ask our AI tutor anything about data
+                                structures, algorithms,
+                                or system design.</p>
+                            <div class="relative max-w-sm mx-auto">
+                                <input type="text" placeholder="Ask me anything..."
+                                    class="w-full px-4 py-3 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm">
+                                <button
+                                    class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white p-2 rounded-full hover:bg-indigo-700">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Track Your Progress</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div
+                    class="text-center p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+                    <div class="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">87%</div>
+                    <div class="text-gray-600 dark:text-gray-300">Completion Rate</div>
+                </div>
+                <div
+                    class="text-center p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+                    <div class="text-4xl font-bold text-green-600 dark:text-green-500 mb-2">156</div>
+                    <div class="text-gray-600 dark:text-gray-300">Problems Solved</div>
+                </div>
+                <div
+                    class="text-center p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+                    <div class="text-4xl font-bold text-yellow-600 dark:text-yellow-500 mb-2">24</div>
+                    <div class="text-gray-600 dark:text-gray-300">Mock Interviews</div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-12 bg-gray-700 p-6 rounded-xl border border-gray-600">
+            <h3 class="text-xl font-semibold mb-4">Weekly Progress</h3>
+            <div class="h-64 flex items-end space-x-2 bg-gray-800 p-4 rounded-lg">
+                <div class="flex-1 bg-indigo-200 rounded-t hover:bg-indigo-300 transition" style="height: 20%;">
+                </div>
+                <div class="flex-1 bg-indigo-300 rounded-t hover:bg-indigo-400 transition" style="height: 40%;">
+                </div>
+                <div class="flex-1 bg-indigo-400 rounded-t hover:bg-indigo-500 transition" style="height: 60%;">
+                </div>
+                <div class="flex-1 bg-indigo-500 rounded-t hover:bg-indigo-600 transition" style="height: 80%;">
+                </div>
+                <div class="flex-1 bg-indigo-600 rounded-t hover:bg-indigo-700 transition" style="height: 60%;">
+                </div>
+                <div class="flex-1 bg-indigo-700 rounded-t hover:bg-indigo-800 transition" style="height: 90%;">
+                </div>
+                <div class="flex-1 bg-indigo-800 rounded-t hover:bg-indigo-900 transition" style="height: 70%;">
+                </div>
+            </div>
+            <div class="flex justify-between text-xs text-gray-400 mt-2">
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+                <span>Sun</span>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">CommAI</h3>
+                    <p class="text-gray-400">Your AI-powered interview preparation platform.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 text-gray-200">Product</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 text-gray-200">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Guides</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 text-gray-200">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 SynergiX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

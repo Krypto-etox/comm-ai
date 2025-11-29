@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mock Interview - SynergiX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.30.1/min/vs/loader.min.js"></script>
+
+    <style>
+        /* --- CSS VARIABLES & THEME SETUP --- */
+        :root {
+            /* Colors matching Tailwind equivalents */
+            --indigo-600: #4f46e5;
+            --indigo-700: #4338ca;
+            --indigo-400: #818cf8;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --white: #ffffff;
+            --green-500: #22c55e;
+            --blue-500: #3b82f6;
+
+            /* Functional Variables */
+            --bg-primary: var(--white);
+            --bg-secondary: #f1f5f9;
+            --text-primary: var(--gray-800);
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --accent: var(--indigo-600);
+            --nav-bg: var(--white);
+            --nav-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .dark {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --accent: var(--indigo-400);
+            --nav-bg: var(--gray-800);
+            --nav-shadow: none;
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            /* Formerly bg-gray-50 */
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            background-color: var(--nav-bg);
+            box-shadow: var(--nav-shadow);
+            height: 4rem;
+            /* h-16 */
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .nav-container {
+            max-width: 80rem;
+            /* max-w-7xl */
+            margin: 0 auto;
+            padding: 0 1rem;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            /* text-2xl */
+            font-weight: 700;
+            /* font-bold */
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* --- LAYOUT --- */
+        .main-layout {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        #left-panel {
+            width: 30%;
+            max-width: 400px;
+            padding: 1.5rem;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-secondary);
+            overflow-y: auto;
+        }
+
+        #right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-4 {
+            margin-top: 1rem;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+
+        .mt-8 {
+            margin-top: 2rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .mr-2 {
+            margin-right: 0.5rem;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .panel-title {
+            font-size: 1.25rem;
+            /* text-xl */
+            font-weight: 600;
+            /* font-semibold */
+            margin: 1rem 0 0 0;
+            color: var(--text-primary);
+        }
+
+        .panel-subtitle {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .tips-title {
+            font-size: 1.125rem;
+            /* text-lg */
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        /* --- LISTS & TIPS --- */
+        .tips-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            font-size: 0.875rem;
+            /* text-sm */
+            color: var(--text-secondary);
+        }
+
+        .tips-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .tips-list i {
+            color: var(--green-500);
+            margin-top: 0.25rem;
+            margin-right: 0.5rem;
+        }
+
+        /* --- AVATAR --- */
+        .avatar-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .avatar-circle i {
+            font-size: 2.25rem;
+            /* text-4xl */
+            color: white;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.98);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
+
+            100% {
+                transform: scale(0.98);
+            }
+        }
+
+        /* --- BUTTONS --- */
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin: 0.5rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+            width: 100%;
+            margin: 0.5rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: var(--bg-primary);
+            opacity: 0.9;
+        }
+
+        .btn-secondary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle .fa-sun {
+            display: none;
+        }
+
+        .dark .theme-toggle .fa-moon {
+            display: none;
+        }
+
+        .dark .theme-toggle .fa-sun {
+            display: block;
+        }
+
+        /* --- EDITOR AREA --- */
+        .editor-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-secondary);
+            flex-shrink: 0;
+        }
+
+        .editor-tabs {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .tab {
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .language-selector {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        #editor-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #editor {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- TOAST NOTIFICATIONS (Replaces Javascript Tailwind classes) --- */
+        .toast {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            color: white;
+            z-index: 100;
+            transition: opacity 0.3s ease-in-out;
+            opacity: 1;
+        }
+
+        .toast.success {
+            background-color: var(--green-500);
+        }
+
+        .toast.info {
+            background-color: var(--blue-500);
+        }
+
+        .toast.error {
+            background-color: #ef4444;
+        }
+
+        .toast.fade-out {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="flex items-center">
+                <a href="index.html" class="logo">CommAI</a>
+            </div>
+            <div class="nav-actions">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+        <div id="left-panel">
+            <div class="text-center">
+                <div class="avatar-circle pulse">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h2 class="panel-title">AI Interview Assistant</h2>
+                <p class="panel-subtitle">I'll help you practice for your next technical interview</p>
+
+                <div class="mt-8 w-full">
+                    <button id="start-btn" class="btn-primary" onclick="startInterview()">
+                        <i class="fas fa-microphone mr-2"></i> Start Interview
+                    </button>
+                    <button id="submit-btn" class="btn-secondary" onclick="submitCode()" disabled>
+                        <i class="fas fa-paper-plane mr-2"></i> Submit Code for Review
+                    </button>
+                </div>
+
+                <div class="mt-8 w-full">
+                    <h3 class="tips-title">Interview Tips</h3>
+                    <ul class="tips-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Speak your thought process out loud</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Ask clarifying questions if needed</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Write clean, efficient code</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="right-panel">
+            <div class="editor-toolbar">
+                <div class="editor-tabs">
+                    <div class="tab active">main.js</div>
+                    <div class="tab">test-cases.js</div>
+                </div>
+                <div class="editor-actions">
+                    <select id="language-selector" class="language-selector">
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                        <option value="cpp">C++</option>
+                    </select>
+                </div>
+            </div>
+            <div id="editor-container">
+                <div id="editor"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or use system preference
+        const savedTheme = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        // Apply the saved theme
+        html.classList.add(savedTheme);
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // --- 1. SETUP CODE EDITOR (VS Code Style) ---
+        function submitCode() {
+            // 1. Get code
+            var currentCode = window.editor.getValue();
+
+            if (!vapiInstance) {
+                alert("Please start the interview first!");
+                return;
+            }
+
+            // 2. FORCE the AI to speak by sending a "User" message
+            var messageToAI = `[SYSTEM EVENT: User submitted code]
+    
+    The user has written the following code:
+    ${currentCode}
+    
+    INSTRUCTIONS:
+    1. READ the code silently.
+    2. Give specific feedback on bugs or efficiency.
+    3. DO NOT END THE CALL. Wait for the user to respond to your feedback.
+    4. Ask a follow-up question about their logic.`;
+
+            vapiInstance.send({
+                type: "add-message",
+                message: {
+                    role: "user",
+                    content: messageToAI
+                }
+            });
+
+            console.log("✅ Code sent as a USER message. AI should reply now.");
+
+            // Show a toast notification
+            showToast('Code submitted for review', 'success');
+        }
+
+        // Show toast notification (UPDATED to use new CSS classes)
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            // Using standard CSS classes defined in <style>
+            toast.classList.add('toast', type === 'success' ? 'success' : 'info');
+
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('fade-out');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize Monaco Editor
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.30.1/min/vs' } });
+
+        // Load Monaco Editor
+        require(['vs/editor/editor.main'], function () {
+            // Set the theme based on current mode
+            const isDark = document.documentElement.classList.contains('dark');
+            monaco.editor.setTheme(isDark ? 'vs-dark' : 'vs');
+
+            // Create editor instance
+            window.editor = monaco.editor.create(document.getElementById('editor'), {
+                value: [
+                    '/**',
+                    ' * Question: Reverse a string in JavaScript',
+                    ' * Example:',
+                    ' * Input: "hello"',
+                    ' * Output: "olleh"',
+                    ' */',
+                    'function reverseString(str) {',
+                    '    // Write your solution here',
+                    '    return str;',
+                    '}',
+                    '',
+                    '// Test cases',
+                    'console.log(reverseString("hello")); // Expected: "olleh"',
+                    'console.log(reverseString(""));       // Expected: ""',
+                    'console.log(reverseString("a"));       // Expected: "a"',
+                    'console.log(reverseString("racecar")); // Expected: "racecar"'
+                ].join('\n'),
+                language: 'javascript',
+                automaticLayout: true,
+                minimap: { enabled: true },
+                fontSize: 14,
+                lineNumbers: 'on',
+                roundedSelection: true,
+                scrollBeyondLastLine: false,
+                readOnly: false,
+                theme: isDark ? 'vs-dark' : 'vs'
+            });
+
+            // Update editor theme when system theme changes
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            darkModeMediaQuery.addListener((e) => {
+                const isDarkMode = e.matches;
+                monaco.editor.setTheme(isDarkMode ? 'vs-dark' : 'vs');
+            });
+        });
+
+        // --- 2. SETUP VOICE AI (Vapi.ai) ---
+        var vapiInstance = null;
+        const vapiPublicKey = "56ec07de-a12a-4660-8355-7cd4e143a5c7";
+        const assistantId = "ee2a5644-8410-481a-b84b-8843da475299";
+
+        // UI Elements
+        const startBtn = document.getElementById('start-btn');
+        const submitBtn = document.getElementById('submit-btn');
+
+        function startInterview() {
+            if (!vapiPublicKey || vapiPublicKey.includes("YOUR_VAPI")) {
+                showToast('Please configure your VAPI key and assistant ID', 'error');
+                return;
+            }
+
+            // Update UI
+            startBtn.disabled = true;
+            startBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Starting...';
+
+            // Fix Monaco vs Vapi conflict
+            var amdDefine = window.define;
+            window.define = null;
+
+            // Load Vapi
+            var script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
+            script.defer = true;
+            script.async = true;
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                window.define = amdDefine; // Restore Monaco
+
+                if (window.vapiSDK) {
+                    // Note: Since we removed Tailwind, we are passing standard HEX colors 
+                    // where possible for the widget configuration.
+                    vapiInstance = window.vapiSDK.run({
+                        apiKey: vapiPublicKey,
+                        assistant: assistantId,
+                        config: {
+                            position: "bottom-right",
+                            fontSize: '16px',
+                            fontFamily: 'Inter, sans-serif',
+                            backgroundColor: '#ffffff', // Fallback color
+                            textColor: '#1f2937', // Fallback color
+                            button: {
+                                backgroundColor: '#4f46e5', // var(--accent)
+                                textColor: '#ffffff',
+                                borderRadius: '50%',
+                                padding: '12px',
+                                icon: 'fas fa-microphone',
+                            },
+                            chat: {
+                                backgroundColor: '#ffffff',
+                                message: {
+                                    user: {
+                                        backgroundColor: '#e0e7ff',
+                                        textColor: '#111827',
+                                    },
+                                    assistant: {
+                                        backgroundColor: '#f3f4f6',
+                                        textColor: '#111827',
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    // Update UI when call starts
+                    vapiInstance.on('call-start', () => {
+                        console.log('✅ Call has STARTED! AI is ready.');
+                        startBtn.innerHTML = '<i class="fas fa-microphone-slash mr-2"></i> End Interview';
+                        startBtn.onclick = endInterview;
+                        startBtn.disabled = false;
+                        submitBtn.disabled = false;
+                        showToast('Interview started! The AI is ready to begin.', 'success');
+                    });
+
+                    vapiInstance.on('call-end', () => {
+                        console.log('❌ Call has ENDED!');
+                        resetUI();
+                        showToast('Interview session ended', 'info');
+                    });
+
+                    vapiInstance.on('speech-start', () => {
+                        console.log('🗣️ AI is speaking now...');
+                    });
+
+                    vapiInstance.on('error', (e) => {
+                        console.error('🔴 Vapi Error:', e);
+                        showToast('An error occurred with the voice assistant', 'error');
+                        resetUI();
+                    });
+                }
+            };
+
+            script.onerror = function () {
+                console.error('Failed to load Vapi SDK');
+                showToast('Failed to load voice assistant. Please try again.', 'error');
+                resetUI();
+            };
+        }
+
+        function endInterview() {
+            if (vapiInstance) {
+                vapiInstance.stop();
+            }
+            resetUI();
+        }
+
+        function resetUI() {
+            startBtn.innerHTML = '<i class="fas fa-microphone mr-2"></i> Start Interview';
+            startBtn.onclick = startInterview;
+            startBtn.disabled = false;
+            submitBtn.disabled = true;
+        }
+    </script>
+</body>
+
+</html>
